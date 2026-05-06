@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>$CARPET — Stay Grounded · On Ink</title>
+<meta name="description" content="Not a rug. A carpet. The Carpet Movement on Ink. Launched on Sentry.Trading." />
+<meta property="og:title" content="$CARPET — Stay Grounded" />
+<meta property="og:description" content="Not a rug. A carpet. The Carpet Movement on Ink." />
+<meta property="og:image" content="assets/img/og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============== LIVE BACKGROUND — "Carpet Cosmos" ============== -->
+<div class="bg-fx" aria-hidden="true">
+
+  <!-- LAYER 1: aurora fluid (smooth animated radial blobs + SVG turbulence) -->
+  <svg class="bg-fluid" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="liquidFx" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.006 0.008" numOctaves="2" seed="5" result="noise">
+          <animate attributeName="baseFrequency" dur="44s"
+                   values="0.006 0.008; 0.011 0.005; 0.005 0.012; 0.009 0.007; 0.006 0.008"
+                   repeatCount="indefinite"/>
+        </feTurbulence>
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="70"/>
+        <feGaussianBlur stdDeviation="20"/>
+      </filter>
+      <radialGradient id="blobA" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="#8a2be2" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#8a2be2" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="blobB" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="#b15bff" stop-opacity="0.40"/>
+        <stop offset="100%" stop-color="#b15bff" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="blobC" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="#f5c542" stop-opacity="0.16"/>
+        <stop offset="100%" stop-color="#f5c542" stop-opacity="0"/>
+      </radialGradient>
+      <radialGradient id="blobD" cx="50%" cy="50%" r="60%">
+        <stop offset="0%" stop-color="#3a1265" stop-opacity="0.55"/>
+        <stop offset="100%" stop-color="#3a1265" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <g filter="url(#liquidFx)">
+      <circle cx="280"  cy="220" r="380" fill="url(#blobA)"/>
+      <circle cx="1320" cy="640" r="420" fill="url(#blobB)"/>
+      <circle cx="900"  cy="120" r="260" fill="url(#blobC)"/>
+      <circle cx="500"  cy="780" r="320" fill="url(#blobD)"/>
+      <circle cx="1100" cy="380" r="280" fill="url(#blobA)"/>
+    </g>
+  </svg>
+
+  <!-- LAYER 2: Persian medallion constellations — large breathing ghosts -->
+  <div class="medallion-field">
+    <div class="medallion" style="--mx:12%; --my:18%; --mr:340px; --md:0s;  --mp:18s"></div>
+    <div class="medallion" style="--mx:84%; --my:28%; --mr:280px; --md:-6s; --mp:22s"></div>
+    <div class="medallion" style="--mx:25%; --my:72%; --mr:300px; --md:-12s;--mp:20s"></div>
+    <div class="medallion" style="--mx:72%; --my:80%; --mr:360px; --md:-3s; --mp:26s"></div>
+    <div class="medallion" style="--mx:50%; --my:50%; --mr:420px; --md:-9s; --mp:30s"></div>
+  </div>
+
+  <!-- LAYER 3: rising gold dust (counter to the falling ornaments) -->
+  <div class="dust">
+    <span class="dot" style="--x:6%;  --d:-3s;  --dur:14s; --s:0.7"></span>
+    <span class="dot" style="--x:14%; --d:-9s;  --dur:18s; --s:0.5"></span>
+    <span class="dot" style="--x:22%; --d:-12s; --dur:11s; --s:0.9"></span>
+    <span class="dot" style="--x:29%; --d:-1s;  --dur:16s; --s:0.6"></span>
+    <span class="dot" style="--x:36%; --d:-6s;  --dur:13s; --s:0.4"></span>
+    <span class="dot" style="--x:44%; --d:-15s; --dur:20s; --s:0.8"></span>
+    <span class="dot" style="--x:51%; --d:-2s;  --dur:12s; --s:0.55"></span>
+    <span class="dot" style="--x:58%; --d:-8s;  --dur:17s; --s:0.7"></span>
+    <span class="dot" style="--x:65%; --d:-11s; --dur:14s; --s:0.45"></span>
+    <span class="dot" style="--x:72%; --d:-4s;  --dur:19s; --s:0.85"></span>
+    <span class="dot" style="--x:79%; --d:-13s; --dur:15s; --s:0.6"></span>
+    <span class="dot" style="--x:86%; --d:-7s;  --dur:13s; --s:0.5"></span>
+    <span class="dot" style="--x:93%; --d:-10s; --dur:18s; --s:0.7"></span>
+    <span class="dot" style="--x:18%; --d:-17s; --dur:21s; --s:0.4"></span>
+    <span class="dot" style="--x:48%; --d:-21s; --dur:24s; --s:0.5"></span>
+    <span class="dot" style="--x:75%; --d:-19s; --dur:22s; --s:0.4"></span>
+  </div>
+
+  <!-- LAYER 4: Persian ornament rain — themed Matrix rain (refined) -->
+  <div class="ornament-rain">
+    <span class="orn" style="--x:7%;  --d:-2s;  --dur:24s; --s:0.65;--o:0.5"></span>
+    <span class="orn" style="--x:19%; --d:-15s; --dur:28s; --s:0.85;--o:0.55"></span>
+    <span class="orn" style="--x:31%; --d:-9s;  --dur:22s; --s:0.55;--o:0.45"></span>
+    <span class="orn" style="--x:43%; --d:-18s; --dur:26s; --s:0.95;--o:0.6"></span>
+    <span class="orn" style="--x:55%; --d:-5s;  --dur:23s; --s:0.7; --o:0.5"></span>
+    <span class="orn" style="--x:67%; --d:-13s; --dur:21s; --s:0.6; --o:0.45"></span>
+    <span class="orn" style="--x:79%; --d:-1s;  --dur:25s; --s:0.8; --o:0.55"></span>
+    <span class="orn" style="--x:91%; --d:-11s; --dur:20s; --s:0.5; --o:0.4"></span>
+    <span class="orn" style="--x:25%; --d:-22s; --dur:32s; --s:0.4; --o:0.35"></span>
+    <span class="orn" style="--x:61%; --d:-26s; --dur:30s; --s:0.45;--o:0.35"></span>
+  </div>
+
+  <!-- LAYER 5: cursor-following spotlight (smooth-lagged via JS) -->
+  <div class="cursor-spot"></div>
+
+</div>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="brand-wrap">
+    <a href="#top" class="brand">
+      <span class="brand-mark">$CARPET</span>
+      <img src="assets/img/ink-logo.svg" alt="Ink" class="ink-badge"/>
+    </a>
+    <a href="https://sentry.trading" target="_blank" rel="noopener" class="sentry-badge-link" aria-label="Sentry.Trading">
+      <img src="assets/img/sentry-logo.png" alt="Sentry" class="sentry-badge"/>
+    </a>
+  </div>
+  <nav class="nav-links">
+    <a href="#manifesto">Manifesto</a>
+    <a href="#story">The Story</a>
+    <a href="#sentry">Sentry</a>
+    <a href="https://dexscreener.com/ink/0xa00a201fabf48776d5d058a4b6fbd8c8a263a4aa" target="_blank" rel="noopener">Chart</a>
+    <a href="#buy" class="cta">Buy</a>
+  </nav>
+</header>
+
+<a id="top"></a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="kicker">NOT A RUG.</p>
+    <h1>A <span class="purple">CARPET</span>.</h1>
+    <img src="assets/img/mascot.png" alt="Carpet Kraken" class="hero-mascot"/>
+    <p class="tagline">Everyone warns you about rugs. No one talks about carpets.<br/>The real foundation has been under your feet the whole time.</p>
+    <div class="hero-cta">
+      <a href="#buy" class="btn btn-primary">Buy $CARPET</a>
+      <a href="#manifesto" class="btn btn-ghost">Read the Manifesto</a>
+    </div>
+    <p class="chain">On <strong>Ink</strong> · Launched on <strong>Sentry.Trading</strong> · Stay grounded.</p>
+  </div>
+</section>
+
+<!-- TRUTHS MARQUEE -->
+<section class="truths" aria-label="Carpet Truths">
+  <div class="truths-track">
+    <span>Rugs Get Pulled.</span><span class="dot">●</span>
+    <span class="purple">Carpets Stay.</span><span class="dot">●</span>
+    <span>Wall to Wall.</span><span class="dot">●</span>
+    <span class="purple">Never Half-Covered.</span><span class="dot">●</span>
+    <span>Whales Don't Walk.</span><span class="dot">●</span>
+    <span class="purple">They Roll.</span><span class="dot">●</span>
+    <span>Not Hype.</span><span class="dot">●</span>
+    <span class="purple">Infrastructure.</span><span class="dot">●</span>
+    <span>Stay Grounded.</span><span class="dot">●</span>
+    <!-- Duplicate for seamless loop -->
+    <span>Rugs Get Pulled.</span><span class="dot">●</span>
+    <span class="purple">Carpets Stay.</span><span class="dot">●</span>
+    <span>Wall to Wall.</span><span class="dot">●</span>
+    <span class="purple">Never Half-Covered.</span><span class="dot">●</span>
+    <span>Whales Don't Walk.</span><span class="dot">●</span>
+    <span class="purple">They Roll.</span><span class="dot">●</span>
+    <span>Not Hype.</span><span class="dot">●</span>
+    <span class="purple">Infrastructure.</span><span class="dot">●</span>
+    <span>Stay Grounded.</span><span class="dot">●</span>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars">
+  <div class="pillar">
+    <div class="pillar-icon">⬛</div>
+    <h3>Not a Rug.</h3>
+    <p>It's a carpet. Wall to wall. Built to stay laid.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">💧</div>
+    <h3>Not Luck.</h3>
+    <p>It's liquidity. Coverage over gaps.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">$</div>
+    <h3>Not Hype.</h3>
+    <p>It's $CARPET. Quietly essential.</p>
+  </div>
+  <div class="pillar">
+    <div class="pillar-icon">♛</div>
+    <h3>Roll With It.</h3>
+    <p>Whales don't walk. They roll.</p>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section id="manifesto" class="manifesto">
+  <div class="manifesto-top">
+    <div class="manifesto-text">
+      <span class="eyebrow">THE MOVEMENT</span>
+      <h2>The Conversation No One Is Having.</h2>
+      <p>Every day in crypto we hear the same thing. <em>Don't get rugged. Watch out for rugs. Another rug pull.</em></p>
+      <p>But no one stops to ask the real question…</p>
+      <p class="big">What about <span class="purple">carpets</span>?</p>
+      <p>Carpets don't get pulled. Carpets don't disappear overnight. Carpets are <strong>infrastructure</strong> — laid down with intention, built to last, designed to support everything above them.</p>
+      <p>And yet… ignored.</p>
+      <a href="#buy" class="btn btn-primary">Join the Movement →</a>
+    </div>
+    <div class="manifesto-art">
+      <img src="assets/img/carpet-stack.png" alt="A stack of $CARPET rolls dripping purple" onerror="this.style.display='none'"/>
+    </div>
+  </div>
+
+  <div class="manifesto-grid">
+    <div class="manifesto-card">
+      <span class="m-num">01</span>
+      <h4>Floor Stability</h4>
+      <p>Stability over chaos. The floor doesn't move.</p>
+    </div>
+    <div class="manifesto-card">
+      <span class="m-num">02</span>
+      <h4>Wall-to-Wall Coverage</h4>
+      <p>Coverage over gaps. No corner left exposed.</p>
+    </div>
+    <div class="manifesto-card">
+      <span class="m-num">03</span>
+      <h4>Long-Term Comfort</h4>
+      <p>Presence over hype. Built to be lived on.</p>
+    </div>
+  </div>
+
+  <blockquote class="pull-quote">"Not just a coin. A <span class="purple">floor</span>."</blockquote>
+</section>
+
+<!-- COMIC STORY (full) -->
+<section id="story" class="comic-strip">
+  <!-- Scroll-driven unrolling carpet background -->
+  <div class="unroll-bg" aria-hidden="true">
+    <div class="unroll-carpet"></div>
+    <div class="unroll-edge"></div>
+  </div>
+  <div class="section-head">
+    <p class="eyebrow">THE STORY</p>
+    <h2>The Carpet Is Still <span class="purple">Unrolling</span>.</h2>
+    <p class="lead">First 10K was the warmup. Whales don't walk — they roll.</p>
+  </div>
+
+  <article class="panel">
+    <div class="panel-img">
+      <img src="assets/img/01-not-a-rug.png" alt="Not a rug, a carpet"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">01</span>
+      <h3>Not a Rug. A Carpet.</h3>
+      <p>The mob screams "rug pull!" while $CARPET paves the road to the moon. They sold. We rolled.</p>
+    </div>
+  </article>
+
+  <article class="panel reverse">
+    <div class="panel-img">
+      <img src="assets/img/02-market-bleeding.png" alt="The market is bleeding, $CARPET is printing"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">02</span>
+      <h3>The Market Is Bleeding. $CARPET Is Printing.</h3>
+      <p>Red candles everywhere. Then a single purple wick splits the sky. Welcome to Purple Season.</p>
+    </div>
+  </article>
+
+  <article class="panel">
+    <div class="panel-img">
+      <img src="assets/img/03-whales-roll.png" alt="Whales don't walk, they roll"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">03</span>
+      <h3>Whales Don't Walk. They Roll.</h3>
+      <p>Retail buys charts. Whales buy carpets. The biggest holders aren't chasing — they're laying floor.</p>
+    </div>
+  </article>
+
+  <article class="panel reverse">
+    <div class="panel-img">
+      <img src="assets/img/04-pov-sold.png" alt="POV: you sold at 5K"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">04</span>
+      <h3>POV: You Sold at 5K.</h3>
+      <p>10K. 25K. 50K. 100K+. The rocket leaves the warehouse while paper hands sit on the doormat.</p>
+    </div>
+  </article>
+
+  <article class="panel">
+    <div class="panel-img">
+      <img src="assets/img/05-respect-the-kraken.png" alt="The Kraken doesn't ape, it rolls out $CARPET"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">05</span>
+      <h3>Respect the Kraken.</h3>
+      <p>The deepest holders don't ape. They wrap themselves in carpet, put on the crown, and wait.</p>
+    </div>
+  </article>
+
+  <article class="panel reverse">
+    <div class="panel-img">
+      <img src="assets/img/06-buy-back-lower.png" alt="I'll buy back lower"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">06</span>
+      <h3>"I'll Buy Back Lower…"</h3>
+      <p>Famous last words. The rocket already lit. $5K → $10K → $25K → $50K → $100K+. Next stop: infinity.</p>
+    </div>
+  </article>
+
+  <article class="panel">
+    <div class="panel-img">
+      <img src="assets/img/07-still-unrolling.png" alt="The carpet is still unrolling"/>
+    </div>
+    <div class="panel-text">
+      <span class="num">07</span>
+      <h3>The Carpet Is Still Unrolling.</h3>
+      <p>Hold the carpet. Change your life. Whales don't chase — they roll.</p>
+    </div>
+  </article>
+</section>
+
+<!-- SENTRY.TRADING -->
+<section id="sentry" class="sentry">
+  <div class="sentry-inner">
+    <p class="eyebrow">LAUNCHED ON</p>
+    <img src="assets/img/sentry-logo.png" alt="Sentry.Trading" class="sentry-hero-logo"/>
+    <h2>Sentry.<span class="purple">Trading</span>.</h2>
+    <p class="lead">$CARPET launched on <strong>Sentry.Trading</strong> — one of the biggest <em>launch platforms on Ink</em>. Every token that launches on Sentry strengthens the platform — and the <strong>$SENTRY</strong> token along with it. Buy $CARPET on Sentry, and you're laying floor twice.</p>
+
+    <div class="sentry-grid">
+      <div class="sentry-card">
+        <div class="sentry-num">01</div>
+        <h4>A Launch Platform</h4>
+        <p>Sentry isn't just a place to swap — it's where new Ink projects get rolled out. $CARPET is one of them.</p>
+      </div>
+      <div class="sentry-card">
+        <div class="sentry-num">02</div>
+        <h4>Tokens Launched = Sentry Wins</h4>
+        <p>Every launch on Sentry feeds the platform — and the $SENTRY token. Carpet underneath the carpet.</p>
+      </div>
+      <div class="sentry-card">
+        <div class="sentry-num">03</div>
+        <h4>One of the Biggest on Ink</h4>
+        <p>Sentry is one of the largest platforms on Ink. Active, growing, and where the action keeps unrolling.</p>
+      </div>
+    </div>
+
+    <div class="sentry-cta">
+      <a href="https://sentry.trading" target="_blank" rel="noopener" class="btn btn-primary">Launch on Sentry.Trading →</a>
+      <a href="#buy" class="btn btn-ghost">Buy $CARPET on Sentry</a>
+    </div>
+  </div>
+</section>
+
+<!-- BUY -->
+<section id="buy" class="buy">
+  <div class="buy-head">
+    <p class="eyebrow">HOW TO BUY</p>
+    <h2>Lay Down Your <span class="purple">Floor</span>.</h2>
+    <p class="lead">$CARPET on <strong>Ink</strong>. Easiest path: <a href="https://sentry.trading" target="_blank" rel="noopener">Sentry.Trading</a>.</p>
+  </div>
+
+  <div class="ca-card">
+    <label>CONTRACT ADDRESS</label>
+    <div class="ca-row">
+      <code id="caText">0xAE85c305034b9F11fBbc772172415f25ff30DAb8</code>
+      <button id="copyBtn" type="button" data-copy="0xAE85c305034b9F11fBbc772172415f25ff30DAb8">Copy</button>
+    </div>
+    <p class="ca-note">Always verify the contract from official sources. Network: <strong>Ink</strong>.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h4>Open Sentry.Trading</h4>
+      <p>Spin up an Ink-ready wallet in seconds. No browser-extension gauntlet required.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h4>Fund It</h4>
+      <p>Bridge or deposit ETH (or supported assets) over to Ink through Sentry.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h4>Buy $CARPET</h4>
+      <p>Paste the contract above, confirm the swap, stay grounded. Welcome to the floor.</p>
+    </div>
+  </div>
+
+  <div class="dex-cta">
+    <h3>See the Chart.</h3>
+    <p>Live price, liquidity, and the unrolling.</p>
+    <div class="dex-buttons">
+      <a class="btn btn-primary" href="https://dexscreener.com/ink/0xa00a201fabf48776d5d058a4b6fbd8c8a263a4aa" target="_blank" rel="noopener">View on DexScreener</a>
+      <a class="btn btn-ghost" href="https://x.com/CarpetonINK" target="_blank" rel="noopener">Follow on X</a>
+      <a class="btn btn-ghost" href="https://t.me/carpetoninkportal" target="_blank" rel="noopener">Join Telegram</a>
+    </div>
+  </div>
+
+  <div class="dex-embed">
+    <iframe
+      src="https://dexscreener.com/ink/0xa00a201fabf48776d5d058a4b6fbd8c8a263a4aa?embed=1&theme=dark&trades=0&info=0"
+      title="DexScreener chart"
+      loading="lazy"></iframe>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">
+    <span class="brand-mark">$CARPET</span>
+    <p>Not just a coin. A floor.</p>
+  </div>
+  <div class="footer-links">
+    <a href="https://x.com/CarpetonINK" target="_blank" rel="noopener">X / Twitter</a>
+    <a href="https://t.me/carpetoninkportal" target="_blank" rel="noopener">Telegram</a>
+    <a href="https://dexscreener.com/ink/0xa00a201fabf48776d5d058a4b6fbd8c8a263a4aa" target="_blank" rel="noopener">Chart</a>
+    <a href="https://sentry.trading" target="_blank" rel="noopener">Sentry.Trading</a>
+    <a href="#buy">Buy</a>
+    <a href="#manifesto">Manifesto</a>
+  </div>
+  <p class="ca">CA: <code>0xAE85c305034b9F11fBbc772172415f25ff30DAb8</code></p>
+  <p class="fineprint">$CARPET is a memecoin on Ink. No promises. Stay grounded.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
