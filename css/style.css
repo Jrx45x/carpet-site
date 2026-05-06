@@ -619,23 +619,25 @@ img { max-width: 100%; height: auto; display: block; }
   position: absolute;
   top: 0;
   left: 50%;
-  /* Single tile with native ornament; no second background, no filter */
+  transform: translate3d(-50%, 0, 0);
   width: clamp(520px, 70vw, 920px);
   height: 100%;
   background-color: #1a0f2c;
   background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='240' height='240'><rect width='240' height='240' fill='%231a0f2c'/><g stroke-linecap='round' stroke-linejoin='round'><line x1='0' y1='30' x2='240' y2='30' stroke='%23b15bff' stroke-opacity='0.30' stroke-width='1'/><line x1='0' y1='40' x2='240' y2='40' stroke='%23f5c542' stroke-opacity='0.18' stroke-width='0.8'/><line x1='0' y1='200' x2='240' y2='200' stroke='%23f5c542' stroke-opacity='0.18' stroke-width='0.8'/><line x1='0' y1='210' x2='240' y2='210' stroke='%23b15bff' stroke-opacity='0.30' stroke-width='1'/><g transform='translate(120 120)'><path d='M0 -50 L42 0 L0 50 L-42 0 Z' fill='none' stroke='%23b15bff' stroke-opacity='0.55' stroke-width='1.5'/><path d='M0 -34 L26 0 L0 34 L-26 0 Z' fill='none' stroke='%23f5c542' stroke-opacity='0.45' stroke-width='1'/><path d='M0 -18 L14 0 L0 18 L-14 0 Z' fill='%23f5c542' fill-opacity='0.18' stroke='%23f5c542' stroke-opacity='0.55' stroke-width='0.8'/><circle r='3' fill='%23f5c542'/></g><path d='M30 120 L48 108 L62 120 L48 132 Z' fill='none' stroke='%23b15bff' stroke-opacity='0.40' stroke-width='1'/><path d='M210 120 L192 108 L178 120 L192 132 Z' fill='none' stroke='%23b15bff' stroke-opacity='0.40' stroke-width='1'/></g></svg>");
-  background-repeat: repeat;
-  background-size: 240px 240px;
-  background-position: top center;
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240' width='240' height='240'><rect width='240' height='240' fill='%231a0f2c'/><g stroke-linecap='round' stroke-linejoin='round'><line x1='0' y1='30' x2='240' y2='30' stroke='%23b15bff' stroke-opacity='0.30' stroke-width='1'/><line x1='0' y1='40' x2='240' y2='40' stroke='%23f5c542' stroke-opacity='0.18' stroke-width='0.8'/><line x1='0' y1='200' x2='240' y2='200' stroke='%23f5c542' stroke-opacity='0.18' stroke-width='0.8'/><line x1='0' y1='210' x2='240' y2='210' stroke='%23b15bff' stroke-opacity='0.30' stroke-width='1'/><g transform='translate(120 120)'><path d='M0 -50 L42 0 L0 50 L-42 0 Z' fill='none' stroke='%23b15bff' stroke-opacity='0.55' stroke-width='1.5'/><path d='M0 -34 L26 0 L0 34 L-26 0 Z' fill='none' stroke='%23f5c542' stroke-opacity='0.45' stroke-width='1'/><path d='M0 -18 L14 0 L0 18 L-14 0 Z' fill='%23f5c542' fill-opacity='0.18' stroke='%23f5c542' stroke-opacity='0.55' stroke-width='0.8'/><circle r='3' fill='%23f5c542'/></g><path d='M30 120 L48 108 L62 120 L48 132 Z' fill='none' stroke='%23b15bff' stroke-opacity='0.40' stroke-width='1'/><path d='M210 120 L192 108 L178 120 L192 132 Z' fill='none' stroke='%23b15bff' stroke-opacity='0.40' stroke-width='1'/></g></svg>"),
+    repeating-linear-gradient(180deg,
+      rgba(255,255,255,0.022) 0px,
+      rgba(255,255,255,0.022) 1px,
+      transparent 1px,
+      transparent 4px);
+  background-repeat: repeat, repeat;
+  background-size: 240px 240px, 100% 4px;
+  background-position: top center, top center;
+  filter: contrast(1.1);
   opacity: 0.55;
-  /* Reveal via translateY of an oversized inner tile is hard; instead we use
-     clip-path which is GPU-composited. translate3d forces own layer. */
-  transform: translate3d(-50%, 0, 0);
   clip-path: inset(0 0 calc(100% - var(--unroll-y, 0px)) 0);
   -webkit-clip-path: inset(0 0 calc(100% - var(--unroll-y, 0px)) 0);
-  will-change: clip-path, transform;
-  backface-visibility: hidden;
+  will-change: clip-path;
 }
 
 /* Rolled rug edge — cylindrical roll seen from the side */
@@ -702,32 +704,6 @@ img { max-width: 100%; height: auto; display: block; }
     transparent 2px 5px);
   opacity: 0.65;
   border-radius: 0 0 6px 6px;
-}
-
-/* ===== Native scroll-driven unroll (fast path) =====
-   When the browser supports it, the animation runs entirely on the
-   compositor — no JS scroll handler needed. Falls back gracefully to the
-   JS-driven CSS variable approach for older browsers. */
-@supports (animation-timeline: view()) {
-  .comic-strip { view-timeline-name: --story-tl; view-timeline-axis: block; }
-  .unroll-carpet {
-    animation: unroll-carpet-anim linear both;
-    animation-timeline: --story-tl;
-    animation-range: cover 0% cover 60%;
-  }
-  .unroll-edge {
-    animation: unroll-edge-anim linear both;
-    animation-timeline: --story-tl;
-    animation-range: cover 0% cover 60%;
-  }
-  @keyframes unroll-carpet-anim {
-    from { clip-path: inset(0 0 100% 0); -webkit-clip-path: inset(0 0 100% 0); }
-    to   { clip-path: inset(0 0 0% 0);   -webkit-clip-path: inset(0 0 0% 0); }
-  }
-  @keyframes unroll-edge-anim {
-    from { translate: -50% -23px; scale: 1; }
-    to   { translate: -50% calc(var(--story-h, 100vh) - 23px); scale: 0.78; }
-  }
 }
 /* hide edge before user scrolls into the section / after it's fully unrolled */
 .comic-strip[data-unroll="done"] .unroll-edge,
