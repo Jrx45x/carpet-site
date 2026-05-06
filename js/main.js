@@ -91,14 +91,36 @@
     }, { passive: true });
   }
 
-  // ---------- Scroll-driven unrolling carpet behind #story ----------
+  // ---------- Scroll-driven unrolling carpet ----------
   const story = document.getElementById('story');
   if (story) {
-    // Cached measurements (only re-measured on resize / layout change)
-    let storyTop = 0;
-    let storyHeight = 0;
-    let vh = 0;
+    // If the browser supports native scroll-driven animations, the CSS
+    // @supports block in style.css does all the work on the compositor —
+    // skip the JS scroll handler entirely.
+    const nativeSupport =
+      typeof CSS !== 'undefined' &&
+      CSS.supports &&
+      CSS.supports('animation-timeline', 'view()');
 
+    if (nativeSupport) {
+      // Native path still needs --story-h (used in keyframe calc)
+      const setStoryH = () => {
+        story.style.setProperty('--story-h', story.offsetHeight + 'px');
+      };
+      setStoryH();
+      window.addEventListener('resize', setStoryH);
+      if ('ResizeObserver' in window) {
+        new ResizeObserver(setStoryH).observe(story);
+      }
+      return;
+    }
+
+    // ---- JS fallback for older browsers ----
+    // Scope variable writes to .unroll-bg so style invalidation only hits the
+    // carpet + edge, not the whole comic-strip subtree.
+    const target = story.querySelector('.unroll-bg') || story;
+
+    let storyTop = 0, storyHeight = 0, vh = 0;
     const measure = () => {
       const r = story.getBoundingClientRect();
       storyTop = r.top + window.scrollY;
@@ -106,8 +128,6 @@
       vh = window.innerHeight || document.documentElement.clientHeight;
     };
 
-    // Eased progress curve — slight ease-in-out so the unroll feels weighted
-    // (instead of perfectly linear, which can feel mechanical)
     const easeInOut = (t) => t < 0.5
       ? 2 * t * t
       : 1 - Math.pow(-2 * t + 2, 2) / 2;
@@ -117,42 +137,34 @@
     const update = () => {
       ticking = false;
       const sy = window.scrollY;
+      // Out-of-view fast exit — don't write to DOM if user isn't near the section
+      if (sy < storyTop - vh - 200 || sy > storyTop + storyHeight + 200) {
+        return;
+      }
       const start = storyTop - vh;
       const end   = storyTop + storyHeight - vh * 0.4;
       const range = Math.max(end - start, 1);
       let raw = (sy - start) / range;
       raw = raw < 0 ? 0 : raw > 1 ? 1 : raw;
-
-      // Apply easing so the unroll has slight acceleration/deceleration
       const p = easeInOut(raw);
 
-      // Skip set if change is too tiny (prevents wasted style writes)
-      if (Math.abs(p - lastP) < 0.0008 && p !== 0 && p !== 1) return;
+      if (Math.abs(p - lastP) < 0.0015 && p !== 0 && p !== 1) return;
       lastP = p;
 
-      const y = (p * storyHeight).toFixed(1);
-      const scale = (1 - p * 0.22).toFixed(3);     // roll shrinks as it empties
-
-      story.style.setProperty('--unroll-y', y + 'px');
-      story.style.setProperty('--unroll-scale', scale);
-
+      target.style.setProperty('--unroll-y', (p * storyHeight).toFixed(1) + 'px');
+      target.style.setProperty('--unroll-scale', (1 - p * 0.22).toFixed(3));
       story.dataset.unroll = p < 0.001 ? 'hidden' : (p > 0.998 ? 'done' : 'active');
     };
 
     const onScroll = () => {
-      if (!ticking) {
-        ticking = true;
-        requestAnimationFrame(update);
-      }
+      if (!ticking) { ticking = true; requestAnimationFrame(update); }
     };
-
-    // Re-measure on resize, font-load, or any layout shift
     const remeasure = () => { measure(); update(); };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', remeasure);
     if ('ResizeObserver' in window) {
-      const ro = new ResizeObserver(remeasure);
-      ro.observe(document.body);
+      new ResizeObserver(remeasure).observe(document.body);
     }
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(remeasure);
