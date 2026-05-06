@@ -209,6 +209,12 @@ body::after {
 
 /* ============== MOBILE-SPECIFIC TUNING ============== */
 @media (max-width: 720px) {
+  /* Mascot — smaller scale + extra breathing room above so it doesn't crash into the H1 */
+  .hero-mascot {
+    scale: 1.1;
+    margin: 24px auto 40px;
+  }
+
   /* Background — keep the vibe, lighten the cost */
   body::before { filter: blur(80px) saturate(1.2); }     /* lower blur radius */
   .bg-fluid    { opacity: 0.75; }                         /* less intense */
@@ -243,6 +249,8 @@ body::after {
 
 @media (max-width: 480px) {
   /* Even tighter on phone-narrow */
+  .hero-mascot { scale: 1.0; margin: 20px auto 32px; }
+
   .pillars { grid-template-columns: 1fr; }
   .nav { padding: 12px 16px; gap: 10px; }
   .brand { font-size: 20px; }
@@ -268,10 +276,12 @@ img { max-width: 100%; height: auto; display: block; }
 .nav {
   position: sticky; top: 0; z-index: 50;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 16px 28px;
-  background: rgba(12, 8, 20, 0.82);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(177,91,255,0.15);
+  padding: 14px 28px;
+  /* Lighter, more airy — relies on stronger backdrop blur for readability */
+  background: rgba(12, 8, 20, 0.42);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  border-bottom: 1px solid rgba(177,91,255,0.10);
 }
 .brand {
   display: inline-flex; align-items: center; gap: 8px;
@@ -385,16 +395,24 @@ img { max-width: 100%; height: auto; display: block; }
   width: min(240px, 48vw);
   height: auto;
   margin: 8px auto 70px;
-  transform: scale(1.45);
+  /* Use individual transform properties so scale and translate compose cleanly,
+     and so we can override scale per breakpoint without redefining the keyframe. */
+  scale: 1.45;
   transform-origin: center center;
   filter:
     drop-shadow(0 0 40px rgba(177,91,255,0.55))
     drop-shadow(0 0 90px rgba(138,43,226,0.32));
   animation: mascot-float 6.5s ease-in-out infinite;
+  /* Kill any default browser styling on <img> while it's loading */
+  border: 0;
+  background: transparent;
+  outline: none;
+  font-size: 0;
+  color: transparent;
 }
 @keyframes mascot-float {
-  0%, 100% { transform: scale(1.45) translateY(0); }
-  50%      { transform: scale(1.45) translateY(-7px); }
+  0%, 100% { translate: 0 0; }
+  50%      { translate: 0 -7px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-mascot { animation: none; }
