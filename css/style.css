@@ -209,11 +209,8 @@ body::after {
 
 /* ============== MOBILE-SPECIFIC TUNING ============== */
 @media (max-width: 720px) {
-  /* Mascot — smaller scale + extra breathing room above so it doesn't crash into the H1 */
-  .hero-mascot {
-    scale: 1.1;
-    margin: 24px auto 40px;
-  }
+  /* Banner stage already spans full viewport — just trim bottom margin */
+  .hero-stage { margin-bottom: 8px; }
 
   /* Background — keep the vibe, lighten the cost */
   body::before { filter: blur(80px) saturate(1.2); }     /* lower blur radius */
@@ -249,7 +246,7 @@ body::after {
 
 @media (max-width: 480px) {
   /* Even tighter on phone-narrow */
-  .hero-mascot { scale: 1.0; margin: 20px auto 32px; }
+  .hero-stage { margin-bottom: 6px; }
 
   .pillars { grid-template-columns: 1fr; }
   .nav { padding: 12px 16px; gap: 10px; }
@@ -369,7 +366,7 @@ img { max-width: 100%; height: auto; display: block; }
 .section-head .lead { color: var(--muted); font-size: 18px; }
 
 /* ============== HERO ============== */
-.hero { position: relative; text-align: center; padding: 40px 24px 56px; overflow: hidden; }
+.hero { position: relative; text-align: center; padding: 8px 24px 24px; overflow: hidden; }
 .hero-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   /* Single soft spotlight from the top — the global bg does the heavy lifting */
@@ -390,30 +387,80 @@ img { max-width: 100%; height: auto; display: block; }
   z-index: 1;
 }
 /* Kraken mascot — sits just below the headline, inline */
-.hero-mascot {
+/* Hero stage: full-viewport-wide container holding banner + overlaid headline */
+.hero-stage {
+  position: relative;
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: 0;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Overlay text sits horizontally centered, anchored toward the top */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  pointer-events: none;
+  padding: 1% 24px 0;
+}
+.hero-overlay .kicker {
+  margin-bottom: 4px;
+  text-shadow:
+    0 2px 14px rgba(0,0,0,0.85),
+    0 0 28px rgba(0,0,0,0.65);
+}
+.hero-overlay h1 {
+  margin: 0;
+  text-shadow:
+    0 2px 18px rgba(0,0,0,0.9),
+    0 0 38px rgba(0,0,0,0.75),
+    0 0 80px rgba(12,8,20,0.6);
+}
+
+/* Wizard banner — full-viewport hero image, edges fade into the background */
+.hero-banner {
   display: block;
-  width: min(240px, 48vw);
+  width: 100%;
+  max-width: none;
   height: auto;
-  margin: 8px auto 70px;
-  /* Use individual transform properties so scale and translate compose cleanly,
-     and so we can override scale per breakpoint without redefining the keyframe. */
-  scale: 1.45;
-  transform-origin: center center;
+  margin: 0;
+  /* Soft fade on top + bottom + sides so the banner blends into the page bg */
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 9%, #000 86%, transparent 100%),
+    linear-gradient(to right,  transparent 0%, #000 4%, #000 96%, transparent 100%);
+  -webkit-mask-composite: source-in;
+          mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 9%, #000 86%, transparent 100%),
+    linear-gradient(to right,  transparent 0%, #000 4%, #000 96%, transparent 100%);
+          mask-composite: intersect;
   filter:
-    drop-shadow(0 0 40px rgba(177,91,255,0.55))
-    drop-shadow(0 0 90px rgba(138,43,226,0.32));
-  animation: mascot-float 6.5s ease-in-out infinite;
-  /* Kill any default browser styling on <img> while it's loading */
+    drop-shadow(0 0 50px rgba(177,91,255,0.35))
+    drop-shadow(0 0 120px rgba(138,43,226,0.22));
+  animation: banner-float 7s ease-in-out infinite;
+  /* hide the alt-text/border placeholder during load */
   border: 0;
   background: transparent;
   outline: none;
   font-size: 0;
   color: transparent;
 }
-@keyframes mascot-float {
+@keyframes banner-float {
   0%, 100% { translate: 0 0; }
-  50%      { translate: 0 -7px; }
+  50%      { translate: 0 -6px; }
 }
+
+/* legacy mascot styles kept for safety in case of cached HTML — also hidden if present */
+.hero-mascot { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero-mascot { animation: none; }
 }
@@ -430,13 +477,15 @@ img { max-width: 100%; height: auto; display: block; }
   font-family: var(--font-display);
   font-size: clamp(64px, 10vw, 130px);
   line-height: 0.9; letter-spacing: 2px;
-  margin: 6px 0 12px;
+  margin: 6px 0 18px;
+  text-align: center;
 }
-.tagline { font-size: 17px; color: var(--muted); max-width: 680px; margin: 14px auto 22px; }
-.hero-cta { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.kicker { text-align: center; }
+.tagline { font-size: 16px; color: var(--muted); max-width: 680px; margin: 4px auto 14px; }
+.hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 .chain {
-  margin-top: 20px; font-family: var(--font-display);
-  letter-spacing: 3px; color: var(--muted); font-size: 14px;
+  margin-top: 12px; font-family: var(--font-display);
+  letter-spacing: 3px; color: var(--muted); font-size: 13px;
 }
 
 /* ============== TRUTHS MARQUEE ============== */

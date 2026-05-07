@@ -10,6 +10,8 @@
 <meta property="og:image" content="assets/img/og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/png" href="assets/img/favicon.png" />
+<!-- Preload hero banner so it's painted on first frame, no placeholder flash -->
+<link rel="preload" as="image" href="assets/img/wizard-banner.png?v=3" fetchpriority="high" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
@@ -132,9 +134,15 @@
 <section class="hero">
   <div class="hero-bg"></div>
   <div class="hero-inner">
-    <p class="kicker">NOT A RUG.</p>
-    <h1>A <span class="purple">CARPET</span>.</h1>
-    <img src="assets/img/mascot.png" alt="Carpet Kraken" class="hero-mascot"/>
+    <div class="hero-stage">
+      <img src="assets/img/wizard-banner.png?v=3" alt="" class="hero-banner"
+           width="1280" height="426"
+           decoding="async" loading="eager" fetchpriority="high"/>
+      <div class="hero-overlay">
+        <p class="kicker">NOT A RUG.</p>
+        <h1>A <span class="purple">CARPET</span>.</h1>
+      </div>
+    </div>
     <p class="tagline">Everyone warns you about rugs. No one talks about carpets.<br/>The real foundation has been under your feet the whole time.</p>
     <div class="hero-cta">
       <a href="#buy" class="btn btn-primary">Buy $CARPET</a>
